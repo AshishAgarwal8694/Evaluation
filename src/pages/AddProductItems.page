@@ -1,0 +1,22 @@
+<apex:page standardController="Opportunity" extensions="AddProductsExtension">
+    <apex:form >
+        <apex:pageBlock title="Select Products">
+        
+            <apex:pageBlockButtons >
+                <apex:commandButton value="Select" action="/apex/AddProducts"/>
+                <apex:commandButton value="Cancel" action="/006"/>
+            </apex:pageBlockButtons>
+        
+            <apex:pageBlockTable value="{!products}" var="p">
+                <apex:column headerValue="Select">
+                    <apex:inputCheckbox value="{!p.selected}"/>
+                </apex:column>
+                <apex:column value="{!p.prod.Name}"/>
+                <apex:column value="{!p.prod.ProductCode}"/>
+                <apex:column value="{!p.prod.Description}"/>
+                <apex:column value="{!p.prod.Family}"/>
+            </apex:pageBlockTable>
+        
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

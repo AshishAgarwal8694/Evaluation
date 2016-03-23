@@ -1,0 +1,40 @@
+<apex:page standardController="Opportunity" extensions="AddProductsExtension" id="myPage">
+    <apex:form id="myForm">
+        <apex:pageBlock >
+            <apex:pageBlockButtons >
+                    <apex:commandButton value="Save" action="{!save}"/>
+                    <apex:commandButton value="Select More" action="/apex/AddProductItems"  immediate="true"/>
+                    <apex:commandButton value="Cancel" action="/006" immediate="true"/>    
+            </apex:pageBlockButtons>
+            
+            <apex:pageBlockSection >
+                <apex:inputText label="Start Date" value="{!startDate}" required="true"/>
+            </apex:pageBlockSection>
+          
+            <apex:pageBlockSection >
+                <apex:inputText label="Period" value="{!period}" required="true"/><br/>
+                <apex:commandButton value="Apply To All" action="{!reCalculate}" reRender="ValueSection"/>              
+            </apex:pageBlockSection> 
+            
+            <apex:pageBlockSection id="ValueSection">
+                <apex:pageBlockTable value="{!Selectedproducts}" var="p">
+                    <apex:column value="{!p.prod.name}" headerValue="Product Name"/>
+                    <apex:column value="{!p.periods}" headerValue="Period"/>
+                    <apex:column value="{!p.start}" headerValue="Start Date"/>
+                    <apex:column value="{!p.ends}" headerValue="End Date"/>
+                    <apex:column headerValue="Periodic Price">
+                        <apex:inputText value="{!p.pPrice}"/>
+                    </apex:column>
+                    <apex:column headerValue="Quantity">
+                        <apex:inputText value="{!p.Units}"/>
+                    </apex:column>
+                    <apex:column headerValue="Unit Price">
+                        <apex:inputText value="{!p.unitPrice}"/>    
+                    </apex:column>
+                    <apex:column value="{!p.TotalPrice}" headerValue="Total Price"/>
+                    
+                </apex:pageBlockTable>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>
